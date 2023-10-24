@@ -135,6 +135,20 @@ button:disabled {
     }
 }
 
+.example-query {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 7px;
+    margin: 10px 5px;
+    border: 1px solid #102236;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.example-query:hover {
+    background: #102236;
+}
+
 footer {
     text-align: center;
     margin: 20px;

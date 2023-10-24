@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle, faSpinner} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import packageJSON from '../package.json'
+import {ExampleSearchQuery} from "./ExampleSearchQuery.tsx";
 
 function App() {
     const searchInputRef = useRef<HTMLInputElement>(null)
@@ -15,7 +16,7 @@ function App() {
     const [emotes, setEmotes] = useState<any[]>([])
     const [maxEmotes, setMaxEmotes] = useState<number>(20)
 
-    async function searchProfiles() {
+    async function searchProfiles(query: string) {
         if (searching !== -1) return
         console.time("Loading emotes")
         let emoteList: { id: string; name: string, url: string, author: any, unlisted: boolean }[] = []
@@ -57,6 +58,13 @@ function App() {
         setMaxEmotes(maxEmotes + 20)
     }
 
+    function search(query: string) {
+        if (searchInputRef.current === null) return
+        searchInputRef.current.value = query
+        setQuery(query)
+        searchProfiles(query).then()
+    }
+
     return (
         <main>
             <div style={{margin: '30px 0'}}>
@@ -69,9 +77,9 @@ function App() {
                     <input placeholder={'Szukaj emotek...'} ref={searchInputRef} onInput={(obj)=>{
                         setQuery(obj.currentTarget.value)
                     }} onKeyDown={(e)=>{
-                        if (e.key === 'Enter' && searching === -1) searchProfiles()
+                        if (e.key === 'Enter' && searching === -1) searchProfiles(query)
                     }}/>
-                    <button onClick={searchProfiles} disabled={searching !== -1}>Szukaj</button>
+                    <button onClick={()=>{searchProfiles(query)}} disabled={searching !== -1}>Szukaj</button>
                     <div style={{padding: '5px 0', fontSize: '.8rem', color: '#aaa'}}>
                         <p>Czegoś brakuje?</p>
                         <a href={'https://7tv.app/emotes?page=1'}>Skorzystaj z oficjalnej wyszukiwarki</a>
@@ -94,7 +102,15 @@ function App() {
                 {emotes.length === 0 ? <>
                 {firstTime ? <>
                     <img alt={'Emotka aha15'} src={'https://cdn.7tv.app/emote/641f661b2632d8d9a76eb3ad/4x.webp'} width={'70px'} style={{margin: 'auto auto 10px auto'}} />
-                    <p>Wyszukaj emotkę wpisując jej nazwę lub autora w polu powyżej</p></> : <>
+                    <p>Wyszukaj emotkę wpisując jej nazwę lub autora w polu powyżej</p>
+                    <div style={{textAlign: 'center', margin: '10px 0'}}>
+                        <p>Zacznij od:</p>
+                        <ExampleSearchQuery text={'aha'} search={search} />
+                        <ExampleSearchQuery text={'jasper'} search={search} />
+                        <ExampleSearchQuery text={'peepo'} search={search} />
+                    </div>
+
+                </> : <>
                     <img alt={'Emotka aha'} src={'https://cdn.7tv.app/emote/6287c2ca6d9cd2d1f31b5e7d/4x.webp'} width={'70px'} style={{margin: 'auto auto 10px auto'}} />
                     <p>Nie znaleziono emotek.</p>
                 </>}</> : <button onClick={loadMoreEmotes} disabled={maxEmotes >= emotes.length}>Wczytaj więcej emotek</button>}
