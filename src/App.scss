@@ -60,13 +60,13 @@ main {
 }
 
 a {
-    color: white;
+    color: #2e66ff;
     text-decoration: none;
     transition: .2s;
 }
 
 a:hover {
-    color: #496bd3;
+    color: #244fc4;
     text-decoration: none;
 }
 
@@ -117,6 +117,22 @@ button:disabled {
     width: 25px;
     height: 25px;
     margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 15px;
+    border: 1px solid #102236;
+    border-radius: 7px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    .fill {
+        transition: .25s;
+        border-radius: 7px;
+        background: #0036D1;
+        height: 15px;
+    }
 }
 
 footer {
