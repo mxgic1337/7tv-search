@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+    color: #fafafa;
+    font-family: 'Inter', sans-serif;
+    background: #070E15;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.emote-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 90vw;
+}
+
+.emote {
+    border: 1px solid #102236;
+    padding: 10px 20px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+
+    margin: 5px 0;
+    border-radius: 10px;
+
+    .unlisted {
+        margin-left: 5px;
+        color: #aaa;
+        scale: .8;
+    }
+
+    .img {
+        display: flex;
+        width: 70px;
+        margin-right: 10px;
+        justify-content: center;
+
+        img {
+            max-width: 100%;
+            max-height: 50px;
+            transition: .2s;
+        }
+    }
+
+    transition: .2s;
+}
+
+.emote:hover {
+    border: 1px solid #0036D1;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    transition: .2s;
+}
+
+a:hover {
+    color: #496bd3;
+    text-decoration: none;
+}
+
+input {
+    margin: 5px 0;
+    height: 40px;
+    padding: 0 15px;
+    font-family: 'Inter', sans-serif;
+    color: #fafafa;
+    border: 1px solid #102236;
+    border-radius: 7px;
+    background: #070E15;
+}
+
+button {
+    margin: 5px 0;
+    height: 40px;
+    color: #fafafa;
+    padding: 0 15px;
+    background: #0036D1;
+    border: 1px solid #0000;
+    transition: .2s;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    border-radius: 7px;
+}
+
+button:hover {
+    background: #002fb7;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background: #102236;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    animation: loading 1s infinite;
+    width: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    margin: 20px;
+    color: #102236;
+
+    .link {
+        color: #102236;
+        svg {
+            $size: 30px;
+            margin: 10px;
+            width: $size;
+            height: $size;
+        }
+    }
+}
