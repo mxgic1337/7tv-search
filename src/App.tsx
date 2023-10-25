@@ -38,7 +38,7 @@ function App() {
                         author: json.emotes[i2].data.owner,
                         unlisted: !json.emotes[i2].data.state.includes('LISTED'),
                     }
-                    if (!emoteList.some(e => e.id === emote.id) && (emote.name.toLowerCase().includes(query.toLowerCase()) || emote.author.display_name.toLowerCase().includes(query.toLowerCase()))) {
+                    if (!emoteList.some(e => e.id === emote.id) && (matchesFilter(emote.name, query) || matchesFilter(emote.author.display_name, query))) {
                         emoteList.push(emote)
                     }
                     loadedEmotes++;
@@ -63,6 +63,14 @@ function App() {
         searchInputRef.current.value = query
         setQuery(query)
         searchProfiles(query).then()
+    }
+
+    function matchesFilter(text: string, filter: string) {
+        const filters = filter.split(' ')
+        for (const i in filters) {
+            if (text.toLowerCase().includes(filters[i].toLowerCase())) return true
+        }
+        return false
     }
 
     return (
